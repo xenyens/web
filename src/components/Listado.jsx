@@ -9,9 +9,9 @@ const Listado = ({estudiantes,setEstudiante}) => {
     <h2 className='font-bold text-center'>Administra Estudiantes</h2>
     
     {
-      estudiantes.map((estudiante,key) => 
+      estudiantes.map((estudiante) => 
           <Estudiante 
-            key={key} 
+            key={estudiante.id} 
             estudiante={estudiante}
             setEstudiante={setEstudiante}
           />

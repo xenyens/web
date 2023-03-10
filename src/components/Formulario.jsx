@@ -37,14 +37,25 @@ const Formulario = ({estudiante,estudiantes,setEstudiantes}) => {
 
       setError(false);
 
-      const objetoEstudiante = {
-        id: generarID(),
+      const objetoEstudiante = {        
         nombre,
         carrera,
         semestre,
         promedio
       }
-      setEstudiantes([...estudiantes,objetoEstudiante])
+
+      if(estudiante.id){        
+        objetoEstudiante.id = estudiante.id;
+        const estudiantesActualizados = estudiantes.map( estudianteState => estudianteState.id === estudiante.id ? objetoEstudiante : estudianteState)
+        setEstudiantes(estudiantesActualizados);
+      } else{ 
+        objetoEstudiante.id = generarID();
+        setEstudiantes([...estudiantes,objetoEstudiante])
+        console.log('Registro nuevo');
+      }
+
+
+     
       limpiar();
     }
 
@@ -124,7 +135,7 @@ const Formulario = ({estudiante,estudiantes,setEstudiantes}) => {
                 <input 
                   type="submit"
                   className='bg-[#bdb2ff] text-white font-bold w-full rounded-md p-2 uppercase hover:bg-[#fffc] hover:text-black cursor-pointer'
-                  value='Agregar estudiante'
+                  value={estudiante.id ? 'Actualizar estudiante' : 'Agregar Estudiante'}
                 />
               </div>
               
